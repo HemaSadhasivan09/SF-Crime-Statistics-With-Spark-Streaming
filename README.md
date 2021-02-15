@@ -23,7 +23,7 @@ The files in the following structure have been included in the Project Workspace
 └── screenshots
     ├── kafka-consumer-console output.png
     ├── Progress reporter after executing a Spark job.png
-    └── Spark Streaming UI as the streaming continues.png
+    └── Spark UI as the streaming continues.png
 ```
 
 The following file should be created separately to check if the `kafka_server.py` is working properly:
