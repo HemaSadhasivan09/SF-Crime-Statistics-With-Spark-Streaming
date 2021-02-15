@@ -55,17 +55,17 @@ After running the codes from terminal 1 to 5, I was able to get the Kafka Consum
 
 ##### Kafka_Consumer_Console
 
-Pic needed
+![Kafka-Console-Consumer Output](screenshots/kafka-consumer-console-output.PNG)
 
 Additionally, after running the code in terminal 6 I was able to execute the Spark jobs and retrieve the Progress Reporter and Spark UI screens capture shown below.
 
 ##### Spark_Job_Progress_Reporter
 
-Pic needed
+![Spark Job Progress Reporter](screenshots/Progress-reporter-after-executing-Spark-job.PNG)
 
 ##### Spark_Streaming_UI
 
-Spark-UI Pic needed
+![Spark UI as the streaming continues](screenshots/Spark-UI.PNG)
     
 
 ## Project Questions
@@ -80,14 +80,9 @@ A little bit of tuning is necessary to obtain the best performance out of a Spar
 
 2. Secondly, reducing the processing time of each batch of data by efficiently utilizing the cluster resources.
 
-Also, I did modify the configuration values as mentioned below to check for its effects. MaxRatePerPartition and the MaxOffsetPerrtigger at 100 seems to work well. As per the literature, achieving Parallelism can improve the performance. It is important to carefully choose the configuration parameter values rather than accepting the default values. It can be more like a trial and error method depending on various factors like dataset size, data processing speed, data ingestion rate, available resources and the like.
+Also, I did modify the configuration values for MaxRatePerPartition and MaxOffsetPertrigger and set it to 100 which seems to work well. Initially, I did set these values to 200 and the data at the console consumer was not consumed as fast as it was at 100. This is my obsservation.
 
-```
-spark.streaming.backpressure.enabled : true
-spark.streaming.kafka.maxRatePerPartition : 100
-spark.sql.shuffle.partitions : 100
-spark.default.parallelism : 100
-```
+As per the literature in the course, achieving Parallelism can improve the performance. It is important to carefully choose the configuration parameter values rather than accepting the default values. It can be more like a trial and error method depending on various factors like dataset size, data processing speed, data ingestion rate, available resources and the like.
     
 ## Tips
 A couple issues were encountered while working on the project. With the help of the posts from the others in Knowledge center, I managed to resolve the issues. Below are the link those: 
