@@ -90,9 +90,8 @@ spark.default.parallelism : 100
 ```
     
 ## Tips
-A few issues were encountered while working on the project. With the help of the posts from the others in Knowledge center, I managed to resolve the issues. Below are the link to a few. 
-1. Not able to read Sample data in Line https://knowledge.udacity.com/questions/369228
-2. Unable to see data on Spark UI https://knowledge.udacity.com/questions/187420
-3. Config files not working as expected https://knowledge.udacity.com/questions/80037
+A couple issues were encountered while working on the project. With the help of the posts from the others in Knowledge center, I managed to resolve the issues. Below are the link those: 
+1. Unable to see data on Spark UI https://knowledge.udacity.com/questions/187420
+2. Config files not working as expected https://knowledge.udacity.com/questions/80037
 
 I would recommend everyone to look into the peer chat room or Knowledge Centre if you are stuck anywhere. Mentor help is also very useful and the mentors are really fast.
