@@ -67,11 +67,12 @@ A little bit of tuning is necessary to obtain the best performance out of a Spar
 
 Also, I did modify the configuration values as mentioned below to check for its effects. MaxRatePerPartition and the MaxOffsetPerrtigger at 100 seems to work well. As per the literature, achieving Parallelism can improve the performance. It is important to carefully choose the configuration parameter values rather than accepting the default values. It can be more like a trial and error method depending on various factors like dataset size, data processing speed, data ingestion rate, available resources and the like.
 
-`*spark.streaming.backpressure.enabled : true
- *spark.streaming.kafka.maxRatePerPartition : 100
- *spark.sql.shuffle.partitions : 100
- *spark.default.parallelism : 100
- `
+`
+* spark.streaming.backpressure.enabled : true
+* spark.streaming.kafka.maxRatePerPartition : 100
+* spark.sql.shuffle.partitions : 100
+* spark.default.parallelism : 100
+`
     
 ## Resources
 A few issues were encountered during the project. I search some of the Knowledge center posts and used them as appropriate.
