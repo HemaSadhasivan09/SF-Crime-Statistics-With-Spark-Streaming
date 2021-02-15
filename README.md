@@ -4,7 +4,7 @@ Project for Udacity Nanodegree program compledted by Hema Sadhasivan
 [![Project passed](https://img.shields.io/badge/project-passed-success.svg)](https://img.shields.io/badge/project-passed-success.svg)
 
 ## Introduction
-In this project, a real-world dataset has been provided, extracted from Kaggle, on San Francisco crime incidents, and statistical analyses of the data using Apache Spark Structured Streaming need to be provided. A Kafka server will be generated to produce data and ingest it through Spark Structured Streaming.
+In this project, a real-world dataset has been provided, on San Francisco crime incidents, and statistical analyses of the data using Apache Spark Structured Streaming need to be provided. A Kafka server will be generated to produce data and ingest it through Spark Structured Streaming.
 
 ## Project
 The files in the following structure have been included in the Project Workspace, which contains three Python files (.py) that are the starter code, the project dataset (two json files of which one of them is a compressed zip file), and some other necessary resources.
