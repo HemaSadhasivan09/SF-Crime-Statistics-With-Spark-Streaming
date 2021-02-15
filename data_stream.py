@@ -33,8 +33,10 @@ def run_spark_job(spark):
         .option("kafka.bootstrap.servers","localhost:9092") \
         .option("subscribe","pd.service.calls") \
         .option("startingOffsets","earliest") \
-        .option("maxOffsetPerTrigger",200) \
-        .option("maxRatePerPartition",200) \
+        .option("maxOffsetPerTrigger",100) \
+        .option("maxRatePerPartition",100) \
+        .option("spark.streaming.ui.retainedBatches", "100") \
+        .option("spark.streaming.ui.retainedStages", "100") \
         .option("stopGracefullyOnShutdown","true") \
         .load()
 
@@ -44,17 +46,19 @@ def run_spark_job(spark):
     # TODO extract the correct column from the kafka input resources
     # Take only value and convert it to String
     #kafka_df = df.selectExpr("")
-    kafka_df = df.selectExpr("CAST (value as STRING)")
+    kafka_df = df.selectExpr("CAST(value as STRING)")
 
     service_table = kafka_df\
         .select(psf.from_json(psf.col('value'), schema).alias("DF"))\
         .select("DF.*")
 
     # TODO select original_crime_type_name and disposition
-    distinct_table =  = service_table.select("original_crime_type_name","disposition","call_date_time")\
-        .distinct()\
-        .withWatermark('call_date_time', "1 minute")
+    distinct_table = service_table.select('original_crime_type_name','disposition', 
+                psf.to_timestamp(psf.col("call_date_time")).alias("call_date_time")
+                                         ).distinct()
 
+    distinct_table.printSchema()
+    
     # count the number of original crime type
     agg_df = distinct_table.dropna().groupBy("original_crime_type_name").count()
 
@@ -65,9 +69,7 @@ def run_spark_job(spark):
         .format('console')\
         .outputMode('Complete')\
         .option("truncate", "false")\
-        .start()\
-        .awaitTermination()
-
+        .start()
 
     # TODO attach a ProgressReporter
     print('=== awaitTermination')
@@ -86,14 +88,11 @@ def run_spark_job(spark):
     radio_code_df = radio_code_df.withColumnRenamed("disposition_code", "disposition")
 
     # TODO join on disposition column
-    join_query = agg_df.join(radio_code_df,col('agg_df.disposition') == col('radio_code_df.disposition'), 'inner')\
-        .writeStream\
-        .queryName("join")\
-        .outputMode('Complete')\
-        .format('console')\
-        .option("truncate", "false")\
+    join_query = agg_df.join(radio_code_df, "disposition") \
+        .writeStream \
+        .outputMode("append") \
+        .format("console") \
         .start()
-
 
     join_query.awaitTermination()
 
